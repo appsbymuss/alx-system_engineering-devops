@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# get the pids of bash prcesses
+for pid in /proc/[0-9]*; do
+    pid=$(basename "$pid")
+    if [ -d "/proc/$pid" ]; then
+        NAME=$(cat "/proc/$pid/comm")
+        if [[ $NAME == "bash" ]]; then
+            echo "$pid $NAME"
+        fi
+    fi
+done

@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+#infinity loop
+can_you_beat_me()
+{
+    echo "I am invincible!!!"
+}
+trap can_you_beat_me SIGTERM
+while true
+do
+    echo To infinity and beyond
+    sleep 2
+done

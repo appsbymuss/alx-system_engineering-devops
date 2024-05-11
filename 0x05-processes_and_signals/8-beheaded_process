@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#yes I can beat you
+kill -9 "$(pgrep -nf 7-highlander)"
+

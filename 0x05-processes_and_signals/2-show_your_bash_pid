@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# get the line includs bash 
+PID=$(ps auxf -A)
+echo "$PID" | grep -e "bash"

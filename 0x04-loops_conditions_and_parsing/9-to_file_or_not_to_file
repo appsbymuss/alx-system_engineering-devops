@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# to file or not to file
+file="school"
+Empty="$file: empty"
+cmd=$(file $file)
+if [ -e "$file" ]; then
+    echo "$file file exists"
+    if [ "$cmd" == "$Empty" ]; then
+        echo "$file file is empty"
+        echo "$file is a regular file"
+    else
+        echo "$file file is not empty"
+        if stat -c "%F" "$file" | grep -q "regular file"; then
+            echo "$file is a regular file"
+        fi
+    fi
+else
+    echo "$file file does not exist"
+fi

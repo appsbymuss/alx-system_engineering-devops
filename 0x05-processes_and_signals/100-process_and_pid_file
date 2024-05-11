@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Why you no love me??
+stty -echoctl
+bye()
+{
+    rm /var/run/myscript.pid
+    exit 0
+}
+do_you_love_kill()
+{
+    echo "I hate the kill command"
+    bye
+}
+do_you_love_me()
+{
+    echo "Y U no love me?!"
+}
+trap do_you_love_kill SIGTERM
+trap do_you_love_me SIGINT
+trap bey SIGQUIT
+
+exec 2>/dev/null
+
+echo $$ > /var/run/myscript.pid
+while true
+do
+    echo To infinity and beyond
+    sleep 2
+done

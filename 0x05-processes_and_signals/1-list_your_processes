@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# get the table of all process
+ps auxf -A

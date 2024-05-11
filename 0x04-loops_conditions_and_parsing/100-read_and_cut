@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# show me users
+((i = 0))
+while ((i == 0)); do
+    awk -F ':' '{printf "%s:%s:%s\n", $1, $3, $6}' /etc/passwd
+    ((i++))
+done
