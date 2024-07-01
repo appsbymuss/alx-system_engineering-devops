@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Redirection:
+
+# Install nginx web server:
+sudo apt -y update
+sudo apt -y upgrade
+sudo apt -y install nginx
+sudo chown -R ubuntu /var/www/
+touch /var/www/html/index.html
+echo "Hello World!" > /var/www/html/index.html
+sudo sed -i "/^}$/i \ \n\tlocation /redirect_me {\n\t\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\t\t# Am omar but you can call me dehao\n\t}\n" /etc/nginx/sites-available/default
+sudo service nginx start

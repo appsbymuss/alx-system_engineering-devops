@@ -1,0 +1,12 @@
+# Global settings
+Host *
+    ForwardAgent yes
+    Compression yes
+
+# Specific host configuration of my server
+Host ubuntu@52.86.89.214
+    HostName 52.86.89.214
+    Port 22
+    User ubuntu
+    PasswordAuthentication no
+    IdentityFile ~/.ssh/shcool

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# generate a pair RSA key
+PKname="school"
+numOfBits=4096
+passphrase='betty'
+
+ssh-keygen -t rsa -b $numOfBits -f $PKname -N $passphrase
+
+# ssh-keygen -t <key_type> -b <key_length> -C <comment> -f <filename> -N <passphrase> -q(for quiet mode No warnings)
