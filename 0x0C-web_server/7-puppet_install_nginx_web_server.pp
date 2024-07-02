@@ -1,33 +1,25 @@
-# install nginx
+# Setup New Ubuntu server with nginx
+
+exec { 'update system':
+        command => '/usr/bin/apt-get update',
+}
+
 package { 'nginx':
-  ensure => installed,
+	ensure => 'installed',
+	require => Exec['update system']
 }
 
-# website index file
-file { '/var/www/html/index.html':
-  content => 'Hello World!',
+file {'/var/www/html/index.html':
+	content => 'Hello World!'
 }
 
-# redirect_me config
-file_line { 'redirect_me':
-  ensure => present,
-  path   => '/etc/nginx/sites-available/default',
-  after  => 'server_name _;',
-  line   => '
-        location /redirect_me {
-            return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
-            # Am omar but you can call me dehao
-        }',
+exec {'redirect_me':
+	command => 'sed -i "24i\	rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default',
+	provider => 'shell'
 }
 
-# stop nginx
-exec { 'stop service':
-  command => 'sudo service nginx stop',
-  path    => ['/bin', '/usr/bin', '/usr/sbin'],
+service {'nginx':
+	ensure => running,
+	require => Package['nginx']
 }
 
-# run nginx
-exec { 'start service':
-  command => 'sudo service nginx start',
-  path    => ['/bin', '/usr/bin', '/usr/sbin'],
-}
