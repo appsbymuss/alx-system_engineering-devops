@@ -1,0 +1,42 @@
+server {
+        location /hbnb_static {alias /data/web_static/current/;index index.html;}
+
+        add_header X-Served-By 392319-web-01;
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+        root /var/www/html;
+
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name _;
+
+        location / {
+                proxy_pass http://localhost:5003/2-hbnb;
+                proxy_redirect off;
+        }
+
+        location /static/ {
+                alias /home/ubuntu/AirBnB_clone_v4/web_dynamic/static/;
+                proxy_redirect off;
+        }
+
+        location /airbnb-onepage {
+                proxy_pass http://localhost:5000/airbnb-onepage;
+                proxy_redirect off;
+        }
+
+        location /airbnb-dynamic/number_odd_or_even/ {
+                proxy_pass http://localhost:5001/number_odd_or_even/;
+                proxy_redirect off;
+        }
+
+        location /api/ {
+                proxy_pass http://localhost:5002/api/;
+                proxy_redirect off;
+        }
+
+        location /redirect_me {return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;}
+
+        location @404 {return 404 "Ceci n'est pas une page\n";}
+}
